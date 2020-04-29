@@ -5,6 +5,6 @@ import { combineReducers } from "redux";
 
 export const allReducers = {
   ...recipesList.register,
-  //   ...recipeView.register,
+  ...recipeView.register,
   //   ...checkout.register,
 };

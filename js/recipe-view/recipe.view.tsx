@@ -1,3 +1,4 @@
+import { size } from "lodash/fp";
 import {
   Body,
   Button,
@@ -12,10 +13,17 @@ import {
 } from "native-base";
 import * as React from "react";
 import { Recipe } from "../recipe-queries/recipe-queries";
+import { useSelector } from "../state-management-system";
 import { IngredientsItemView } from "./components/ingredients-item.view";
 
-const RecipeView: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
-  const itemsChecked = false;
+const RecipeView: React.FC = () => {
+  const itemsChecked = useSelector((state) => size(state.RecipeView.cartDraft));
+  const recipe = useSelector(
+    (state) => state.RecipesList.recipes[state.RecipesList.selectedRecipe]
+  );
+
+  const cartDraft = useSelector((state) => state.RecipeView.cartDraft);
+  console.log(cartDraft);
   return (
     <Content>
       <Card>
@@ -30,12 +38,16 @@ const RecipeView: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
             <CardItem>
               <View style={{ width: "100%", flexDirection: "column" }}>
                 {recipe.ingredients.map(({ name, value, unit }, i) => {
+                  const selected = Boolean(cartDraft[i]);
                   return (
                     <IngredientsItemView
                       key={i}
+                      ingredientIndex={i}
                       name={name}
                       value={value}
                       unit={unit}
+                      selected={selected}
+                      draftValue={cartDraft[i]?.value || 1}
                       last={i === recipe.ingredients.length - 1}
                     />
                   );
@@ -44,13 +56,13 @@ const RecipeView: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
             </CardItem>
           </Card>
         </CardItem>
-        {itemsChecked && (
+        {itemsChecked ? (
           <CardItem style={{ justifyContent: "center" }}>
             <Button>
-              <Text>Add Ingredients To Cart</Text>
+              <Text>Add {itemsChecked} Ingredients To Cart</Text>
             </Button>
           </CardItem>
-        )}
+        ) : null}
         <CardItem>
           <H2>Steps</H2>
         </CardItem>

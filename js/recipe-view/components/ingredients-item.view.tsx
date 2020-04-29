@@ -12,12 +12,21 @@ import {
 import * as React from "react";
 import { Platform } from "react-native";
 import { Unit } from "../../recipe-queries/recipe-queries";
+import { useDispatch } from "../../state-management-system";
+import { RECIPES_LIST_SELECT_RECIPE } from "../../recipes-list-view/recipes-list.reducer";
+import {
+  RECIPE_VIEW_CHANGE_CART_VALUE,
+  RECIPE_VIEW_SELECT_INGREDIENT,
+} from "../recipe.reducer";
 
 interface IngredientItemProps {
   name: string;
   value: number;
   unit: Unit;
   last: boolean;
+  selected: boolean;
+  ingredientIndex: number;
+  draftValue: number;
 }
 
 export const IngredientsItemView: React.FC<IngredientItemProps> = ({
@@ -25,24 +34,30 @@ export const IngredientsItemView: React.FC<IngredientItemProps> = ({
   value,
   unit,
   last,
+  selected,
+  ingredientIndex,
+  draftValue,
 }) => {
-  const [checked, setChecked] = React.useState(false);
+  const dispatch = useDispatch();
 
   return (
     <ListItem
       style={[last ? { borderColor: "transparent" } : null, { flex: 1 }]}
     >
       <CheckBox
-        checked={checked}
+        checked={selected}
         onPress={() => {
-          setChecked(!checked);
+          dispatch({
+            type: RECIPE_VIEW_SELECT_INGREDIENT,
+            payload: ingredientIndex,
+          });
         }}
       />
       <Body>
         <Text>{name}</Text>
       </Body>
       <Right>
-        {checked ? (
+        {selected ? (
           <Item picker>
             <Picker
               mode="dropdown"
@@ -51,7 +66,16 @@ export const IngredientsItemView: React.FC<IngredientItemProps> = ({
                 width: Platform.OS === "ios" ? 70 : 100,
                 marginRight: Platform.OS === "ios" ? 30 : undefined,
               }}
-              selectedValue={String(1)}
+              selectedValue={String(draftValue)}
+              onValueChange={(e) => {
+                dispatch({
+                  type: RECIPE_VIEW_CHANGE_CART_VALUE,
+                  payload: {
+                    itemIndex: ingredientIndex,
+                    value: e,
+                  },
+                });
+              }}
             >
               {Array.from(Array(10)).map((_, i) => (
                 <Picker.Item

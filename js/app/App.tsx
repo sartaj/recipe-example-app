@@ -66,12 +66,8 @@ function App() {
                 ...options({ navigation }),
                 title: route.params.recipe.name,
               })}
-            >
-              {({ route }) => {
-                const { recipe } = route.params;
-                return <RecipeView recipe={recipe} />;
-              }}
-            </Stack.Screen>
+              component={RecipeView}
+            />
             <Stack.Screen name="Checkout" component={CheckoutView} />
           </Stack.Navigator>
         </NavigationContainer>

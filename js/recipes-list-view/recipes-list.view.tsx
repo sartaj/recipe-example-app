@@ -4,11 +4,23 @@ import * as React from "react";
 import { FlatList } from "react-native";
 import { getRecipes, Recipe } from "../recipe-queries/recipe-queries";
 import { useSelector, useDispatch } from "../state-management-system";
-import { RECIPES_LIST_SUCCESS_GET_DATA } from "./recipes-list.reducer";
+import {
+  RECIPES_LIST_SUCCESS_GET_DATA,
+  RECIPES_LIST_SELECT_RECIPE,
+} from "./recipes-list.reducer";
 
-const RecipeListItem: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
+const RecipeListItem: React.FC<{ recipe: Recipe; recipeIndex: number }> = ({
+  recipe,
+  recipeIndex,
+}) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const navigateTo = () => {
+    dispatch({
+      type: RECIPES_LIST_SELECT_RECIPE,
+      payload: recipeIndex,
+    });
     navigation.dispatch(
       StackActions.push("Recipe", {
         recipe,
@@ -40,7 +52,7 @@ export const RecipeListView: React.FC = () => {
       <FlatList<Recipe>
         data={recipes}
         renderItem={({ item, index }) => (
-          <RecipeListItem recipe={item} key={index} />
+          <RecipeListItem recipe={item} recipeIndex={index} key={index} />
         )}
         keyExtractor={(_, index) => index.toString()}
       />
