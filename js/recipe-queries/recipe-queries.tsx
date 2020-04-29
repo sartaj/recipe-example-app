@@ -1,11 +1,11 @@
+export type Unit = "lbs" | "oz" | "tsp" | "cloves" | "cup" | "loaf";
 export interface Recipe {
   name: string;
   ingredients: {
-    [key: string]: {
-      value: number;
-      unit: "lbs" | "oz" | "tsp" | "cloves" | "cup" | "loaf";
-    };
-  };
+    name: string;
+    value: number;
+    unit: Unit;
+  }[];
   steps: {
     description: string;
   }[];
@@ -13,40 +13,48 @@ export interface Recipe {
 
 const quesoDeCabra: Recipe = {
   name: "Quéso de Cabra",
-  ingredients: {
-    Baguettes: {
+  ingredients: [
+    {
+      name: "Baguettes",
       value: 1,
       unit: "loaf",
     },
-    Garlic: {
+    {
+      name: "Garlic",
       value: 2,
       unit: "cloves",
     },
-    "Goat Cheese": {
+    {
+      name: "Goat Cheese",
       value: 8,
       unit: "oz",
     },
-    "Olive Oil": {
+    {
+      name: "Olive Oil",
       value: 1,
       unit: "oz",
     },
-    "Marinara Sauce": {
+    {
+      name: "Marinara Sauce",
       value: 8,
       unit: "oz",
     },
-    Basil: {
+    {
+      name: "Basil",
       value: 1,
       unit: "tsp",
     },
-    Oregano: {
+    {
+      name: "Oregano",
       value: 1,
       unit: "tsp",
     },
-    Thyme: {
+    {
+      name: "Thyme",
       value: 1,
       unit: "tsp",
     },
-  },
+  ],
   steps: [
     {
       description: "Preheat oven to 350 degrees F/180 degrees C",
@@ -77,16 +85,18 @@ const quesoDeCabra: Recipe = {
 
 const riceAndBeans: Recipe = {
   name: "Rice And Beans",
-  ingredients: {
-    Rice: {
+  ingredients: [
+    {
+      name: "Rice",
       value: 1,
       unit: "lbs",
     },
-    Beans: {
+    {
+      name: "Beans",
       value: 1,
       unit: "lbs",
     },
-  },
+  ],
   steps: [
     {
       description: "Preheat oven to 350 degrees F/180 degrees C",

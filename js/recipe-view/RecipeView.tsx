@@ -18,6 +18,7 @@ import { Recipe } from "../recipe-queries/recipe-queries";
 import { IngredientsItemView } from "./components/IngredientsItemView";
 
 const RecipeView: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
+  const itemsChecked = false;
   return (
     <Content>
       <Card>
@@ -30,27 +31,28 @@ const RecipeView: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
         <CardItem>
           <Card>
             <CardItem>
-              <Button>
-                <Text>Add Ingredients To Cart</Text>
-              </Button>
-            </CardItem>
-            <CardItem>
               <View style={{ width: "100%", flexDirection: "column" }}>
-                {Object.keys(recipe.ingredients).map((i) => {
-                  const { value, unit } = recipe.ingredients[i];
+                {recipe.ingredients.map(({ name, value, unit }, i) => {
                   return (
                     <IngredientsItemView
                       key={i}
-                      ingredient={i}
+                      name={name}
                       value={value}
-                      unit={(unit as unknown) as Recipe["ingredients"]["unit"]} // unclear why ts is failing on this
+                      unit={unit}
                     />
                   );
-                }, recipe.ingredients)}
+                })}
               </View>
             </CardItem>
           </Card>
         </CardItem>
+        {itemsChecked && (
+          <CardItem style={{ justifyContent: "center" }}>
+            <Button>
+              <Text>Add Ingredients To Cart</Text>
+            </Button>
+          </CardItem>
+        )}
         <CardItem>
           <H2>Steps</H2>
         </CardItem>

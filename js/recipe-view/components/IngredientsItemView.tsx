@@ -1,56 +1,69 @@
 import {
   Body,
   CheckBox,
+  Icon,
+  Item,
   ListItem,
+  Picker,
   Right,
   Text,
   View,
-  Picker,
-  Item,
-  Icon,
 } from "native-base";
 import * as React from "react";
-import { Recipe } from "../../recipe-queries/recipe-queries";
-import { TextInput } from "react-native";
+import { Platform } from "react-native";
+import { Unit } from "../../recipe-queries/recipe-queries";
 
 interface IngredientItemProps {
-  ingredient: string;
+  name: string;
   value: number;
-  unit: Recipe["ingredients"]["unit"];
+  unit: Unit;
 }
 
 export const IngredientsItemView: React.FC<IngredientItemProps> = ({
-  ingredient,
+  name,
   value,
   unit,
 }) => {
+  const [checked, setChecked] = React.useState(false);
+
   return (
     <View style={{ flex: 1 }}>
       <ListItem>
-        <CheckBox checked={false} />
+        <CheckBox
+          checked={checked}
+          onPress={() => {
+            setChecked(!checked);
+          }}
+        />
         <Body>
-          <Text>{ingredient}</Text>
+          <Text>{name}</Text>
         </Body>
         <Right>
-          <Item picker>
-            <Picker
-              mode="dropdown"
-              iosIcon={<Icon name="arrow-down" />}
-              style={{ width: 75, marginRight: 30 }}
-              selectedValue={String(1)}
-            >
-              {Array.from(Array(10)).map((_, i) => (
-                <Picker.Item
-                  key={i}
-                  label={String((i + 1) * value) + " " + unit}
-                  value={String(i + 1)}
-                />
-              ))}
-            </Picker>
-          </Item>
-          {/* <Text>
-            {value} {unit}
-          </Text> */}
+          {checked ? (
+            <Item picker>
+              <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />}
+                style={{
+                  width: Platform.OS === "ios" ? 70 : 100,
+                  marginRight: Platform.OS === "ios" ? 30 : undefined,
+                }}
+                selectedValue={String(1)}
+              >
+                {Array.from(Array(10)).map((_, i) => (
+                  <Picker.Item
+                    key={i}
+                    label={String((i + 1) * value) + " " + unit}
+                    value={String(i + 1)}
+                  />
+                ))}
+              </Picker>
+            </Item>
+          ) : (
+            <Text>
+              {value} {unit}
+            </Text>
+          )}
         </Right>
       </ListItem>
     </View>
