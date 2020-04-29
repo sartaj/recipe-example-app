@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { Recipe } from "../recipe-queries/recipe-queries";
+import { Recipe } from "../graph-queries/types";
 
 type RecipeListState = {
   recipes: Recipe[];

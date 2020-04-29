@@ -2,7 +2,8 @@ import { StackActions, useNavigation } from "@react-navigation/native";
 import { Container, ListItem, Spinner, Text } from "native-base";
 import * as React from "react";
 import { FlatList } from "react-native";
-import { getRecipes, Recipe } from "../recipe-queries/recipe-queries";
+import { getRecipes } from "../graph-queries/graphq-queries";
+import { Recipe } from "../graph-queries/types";
 import { useSelector, useDispatch } from "../state-management-system";
 import {
   RECIPES_LIST_SUCCESS_GET_DATA,

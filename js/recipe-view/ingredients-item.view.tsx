@@ -10,7 +10,7 @@ import {
 } from "native-base";
 import * as React from "react";
 import { Platform } from "react-native";
-import { Unit } from "../recipe-queries/recipe-queries";
+import { Unit } from "../graph-queries/types";
 import { useDispatch } from "../state-management-system";
 import {
   RECIPE_VIEW_CHANGE_CART_COUNT,

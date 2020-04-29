@@ -1,6 +1,6 @@
 import { Reducer, Action } from "redux";
 import { omit, set } from "lodash/fp";
-import { Unit } from "../recipe-queries/recipe-queries";
+import { Unit } from "../graph-queries/types";
 import { CartStateItem } from "../checkout-view/checkout.reducer";
 
 export const RECIPE_VIEW_SELECT_INGREDIENT = "RECIPE_VIEW_SELECT_INGREDIENT";

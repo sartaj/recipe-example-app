@@ -1,6 +1,6 @@
 import { findIndex, pullAt, remove } from "lodash/fp";
 import { Reducer } from "redux";
-import { Unit } from "../recipe-queries/recipe-queries";
+import { Unit } from "../graph-queries/types";
 
 export const CHECKOUT_ADD_TO_CART = "CHECKOUT_ADD_TO_CART";
 export const CHECKOUT_CHANGE_GROCERY_STORE = "CHECKOUT_CHANGE_GROCERY_STORE";
