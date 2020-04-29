@@ -25,10 +25,11 @@ interface IngredientItemProps {
   selected: boolean;
   index: number;
   draftValue: number;
+  unitPrice: number;
 }
 
 export const IngredientsItemView: React.FC<IngredientItemProps> = React.memo(
-  ({ name, value, unit, last, selected, index, draftValue }) => {
+  ({ name, value, unit, last, selected, index, draftValue, unitPrice }) => {
     const dispatch = useDispatch();
 
     return (
@@ -59,7 +60,7 @@ export const IngredientsItemView: React.FC<IngredientItemProps> = React.memo(
                 mode="dropdown"
                 iosIcon={<Icon name="arrow-down" />}
                 style={{
-                  width: Platform.OS === "ios" ? 70 : 100,
+                  width: "100%",
                   marginRight: Platform.OS === "ios" ? 30 : undefined,
                 }}
                 selectedValue={String(draftValue)}
@@ -76,7 +77,12 @@ export const IngredientsItemView: React.FC<IngredientItemProps> = React.memo(
                 {Array.from(Array(10)).map((_, i) => (
                   <Picker.Item
                     key={i}
-                    label={String((i + 1) * value) + " " + unit}
+                    label={
+                      String((i + 1) * value) +
+                      " " +
+                      unit +
+                      ` ($${(unitPrice * (i + 1)).toFixed(2)})`
+                    }
                     value={String(i + 1)}
                   />
                 ))}

@@ -28,6 +28,12 @@ const RecipeView: React.FC = () => {
   );
   const cartDraft = useSelector((state) => state.RecipeView.cartDraft);
   const cartSize = useSelector((state) => state.Checkout.cart.length);
+
+  const prices = useSelector(
+    (state) =>
+      state.Checkout.groceryStorePrices[state.Checkout.selectedGroceryStore]
+  );
+
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -75,6 +81,7 @@ const RecipeView: React.FC = () => {
                         selected={selected}
                         draftValue={cartDraft[i]?.count || 1}
                         last={i === recipe.ingredients.length - 1}
+                        unitPrice={prices[name]}
                       />
                     );
                   })}

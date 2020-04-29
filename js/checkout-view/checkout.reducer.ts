@@ -1,6 +1,10 @@
 import { findIndex, pullAt, remove } from "lodash/fp";
 import { Reducer } from "redux";
 import { Unit } from "../graph-queries/types";
+import {
+  groceryStorePrices,
+  defaultGroceryStore,
+} from "../graph-queries/graphq-queries";
 
 export const CHECKOUT_ADD_TO_CART = "CHECKOUT_ADD_TO_CART";
 export const CHECKOUT_CHANGE_GROCERY_STORE = "CHECKOUT_CHANGE_GROCERY_STORE";
@@ -32,13 +36,9 @@ export interface CartStateItem {
 
 interface CartState {
   cart: CartStateItem[];
-  groceryStore: string;
+  selectedGroceryStore: keyof typeof groceryStorePrices;
+  groceryStorePrices: typeof groceryStorePrices;
 }
-
-const defaultState = {
-  cart: [],
-  groceryStore: "",
-};
 
 const mergeCart = (cart1: CartStateItem[], cart2: CartStateItem[]) => {
   let updatedCart = [...cart1];
@@ -57,6 +57,11 @@ const mergeCart = (cart1: CartStateItem[], cart2: CartStateItem[]) => {
   return [...updatedCart, ...updatedPayload];
 };
 
+const defaultState = {
+  cart: [],
+  selectedGroceryStore: defaultGroceryStore,
+  groceryStorePrices,
+};
 const reducer: Reducer<CartState, CheckoutActions> = (
   state = defaultState,
   action

@@ -1,4 +1,5 @@
 import { Recipe } from "./types";
+import { map, mapValues } from "lodash/fp";
 
 const quesoDeCabra: Recipe = {
   name: "Quéso de Cabra",
@@ -113,6 +114,28 @@ const riceAndBeans: Recipe = {
     },
   ],
 };
+
+const defaultPrices = {
+  Baguettes: 2.2,
+  Garlic: 0.2,
+  "Goat Cheese": 3,
+  "Olive Oil": 1.3,
+  "Marinara Sauce": 1.2,
+  Basil: 1.5,
+  Oregano: 0.5,
+  Thyme: 0.5,
+  Rice: 5.2,
+  Beans: 3.2,
+};
+
+export const groceryStorePrices = {
+  "Whole Foods": mapValues((value) => value * 1.3, defaultPrices),
+  Wheatsville: mapValues((value) => value * 1.15, defaultPrices),
+  HEB: mapValues((value) => value * 1, defaultPrices),
+  ALDI: mapValues((value) => value * 0.85, defaultPrices),
+};
+
+export const defaultGroceryStore = "Wheatsville";
 
 const RECIPES: Recipe[] = [quesoDeCabra, riceAndBeans];
 
