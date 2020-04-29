@@ -16,7 +16,7 @@ const RecipeListItem: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
     );
   };
   return (
-    <ListItem onPress={navigateTo}>
+    <ListItem noIndent onPress={navigateTo}>
       <Text>{recipe.name}</Text>
     </ListItem>
   );

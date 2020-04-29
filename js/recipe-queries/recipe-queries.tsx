@@ -31,7 +31,7 @@ const quesoDeCabra: Recipe = {
       unit: "oz",
     },
     "Marinara Sauce": {
-      value: 64,
+      value: 8,
       unit: "oz",
     },
     Basil: {
