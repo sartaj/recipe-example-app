@@ -29,7 +29,7 @@ export const RecipeListView: React.FC = () => {
   React.useEffect(() => {
     async function getRecipesEffect() {
       const result = await getRecipes();
-      dispatch({ type: "RECIPES_LIST_SUCCESS_GET_DATA", payload: result });
+      dispatch({ type: RECIPES_LIST_SUCCESS_GET_DATA, payload: result });
     }
     getRecipesEffect();
   }, []);
