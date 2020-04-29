@@ -75,7 +75,53 @@ const quesoDeCabra: Recipe = {
   ],
 };
 
-const RECIPES: Recipe[] = [quesoDeCabra];
+const riceAndBeans: Recipe = {
+  name: "Rice And Beans",
+  ingredients: {
+    Rice: {
+      value: 1,
+      unit: "lbs",
+    },
+    Beans: {
+      value: 1,
+      unit: "lbs",
+    },
+  },
+  steps: [
+    {
+      description: "Preheat oven to 350 degrees F/180 degrees C",
+    },
+    {
+      description: "Mince garlic cloves, mix with quarter cup olive oil",
+    },
+    {
+      description: "Spread mix over baguettes",
+    },
+    {
+      description: "Bake for 25 mins until brown/crispy",
+    },
+    {
+      description: "Put goat cheese in baking dish",
+    },
+    {
+      description: "Surround in marinara sauce leaving top exposed",
+    },
+    {
+      description: "Bake until bubbling for 25-30 mins",
+    },
+    {
+      description: "Serve with garnish",
+    },
+  ],
+};
 
+const RECIPES: Recipe[] = [quesoDeCabra, riceAndBeans];
+
+// Mimic Network Request
+// Ideally, this would be a graphql call
 export const getRecipes = async (): Promise<Recipe[]> =>
-  Promise.resolve(RECIPES);
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(RECIPES);
+    }, 1000);
+  });
