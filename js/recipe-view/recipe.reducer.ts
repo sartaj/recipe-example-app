@@ -1,27 +1,36 @@
 import { Reducer, Action } from "redux";
 import { omit } from "lodash/fp";
+import { Unit } from "../recipe-queries/recipe-queries";
+import { CartStateItem } from "../checkout-view/checkout.reducer";
 
 export const RECIPE_VIEW_SELECT_INGREDIENT = "RECIPE_VIEW_SELECT_INGREDIENT";
-export const RECIPE_VIEW_CHANGE_CART_VALUE = "RECIPE_VIEW_CHANGE_CART_VALUE";
+export const RECIPE_VIEW_CHANGE_CART_COUNT = "RECIPE_VIEW_CHANGE_CART_COUNT";
+export const RECIPE_VIEW_CLEAR_DRAFT = "RECIPE_VIEW_CLEAR_DRAFT";
 
 type RecipeViewActions =
   | {
       type: typeof RECIPE_VIEW_SELECT_INGREDIENT;
-      payload: number;
+      payload: {
+        index: number;
+        name: string;
+        value: number;
+        unit: Unit;
+      };
     }
   | {
-      type: typeof RECIPE_VIEW_CHANGE_CART_VALUE;
+      type: typeof RECIPE_VIEW_CHANGE_CART_COUNT;
       payload: {
-        itemIndex: number;
-        value: number;
+        index: number;
+        count: number;
       };
+    }
+  | {
+      type: typeof RECIPE_VIEW_CLEAR_DRAFT;
     };
 
 type RecipeViewState = {
   cartDraft: {
-    [s: number]: {
-      value: number;
-    };
+    [s: number]: CartStateItem;
   };
 };
 const defaultState = {
@@ -35,19 +44,34 @@ const reducer: Reducer<RecipeViewState, RecipeViewActions> = (
   switch (action.type) {
     case RECIPE_VIEW_SELECT_INGREDIENT:
       return {
-        cartDraft: state.cartDraft[action.payload]
-          ? omit(action.payload, state.cartDraft)
+        ...state,
+        cartDraft: state.cartDraft[action.payload.index]
+          ? omit(action.payload.index, state.cartDraft)
           : {
               ...state.cartDraft,
-              [action.payload]: { value: 1 },
+              [action.payload.index]: {
+                value: action.payload.value,
+                unit: action.payload.unit,
+                name: action.payload.name,
+                count: 1,
+              },
             },
       };
-    case RECIPE_VIEW_CHANGE_CART_VALUE:
+    case RECIPE_VIEW_CHANGE_CART_COUNT:
       return {
+        ...state,
         cartDraft: {
           ...state.cartDraft,
-          [action.payload.itemIndex]: { value: action.payload.value },
+          [action.payload.index]: {
+            ...state.cartDraft[action.payload.index],
+            count: action.payload.count,
+          },
         },
+      };
+    case RECIPE_VIEW_CLEAR_DRAFT:
+      return {
+        ...state,
+        cartDraft: {},
       };
     default:
       return state;

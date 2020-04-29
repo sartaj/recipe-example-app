@@ -13,7 +13,7 @@ import { Platform } from "react-native";
 import { Unit } from "../../recipe-queries/recipe-queries";
 import { useDispatch } from "../../state-management-system";
 import {
-  RECIPE_VIEW_CHANGE_CART_VALUE,
+  RECIPE_VIEW_CHANGE_CART_COUNT,
   RECIPE_VIEW_SELECT_INGREDIENT,
 } from "../recipe.reducer";
 
@@ -23,12 +23,12 @@ interface IngredientItemProps {
   unit: Unit;
   last: boolean;
   selected: boolean;
-  ingredientIndex: number;
+  index: number;
   draftValue: number;
 }
 
 export const IngredientsItemView: React.FC<IngredientItemProps> = React.memo(
-  ({ name, value, unit, last, selected, ingredientIndex, draftValue }) => {
+  ({ name, value, unit, last, selected, index, draftValue }) => {
     const dispatch = useDispatch();
 
     return (
@@ -40,7 +40,12 @@ export const IngredientsItemView: React.FC<IngredientItemProps> = React.memo(
           onPress={() => {
             dispatch({
               type: RECIPE_VIEW_SELECT_INGREDIENT,
-              payload: ingredientIndex,
+              payload: {
+                index,
+                unit,
+                name,
+                value,
+              },
             });
           }}
         />
@@ -60,10 +65,10 @@ export const IngredientsItemView: React.FC<IngredientItemProps> = React.memo(
                 selectedValue={String(draftValue)}
                 onValueChange={(e) => {
                   dispatch({
-                    type: RECIPE_VIEW_CHANGE_CART_VALUE,
+                    type: RECIPE_VIEW_CHANGE_CART_COUNT,
                     payload: {
-                      itemIndex: ingredientIndex,
-                      value: e,
+                      index,
+                      count: e,
                     },
                   });
                 }}

@@ -21,11 +21,7 @@ const RecipeListItem: React.FC<{ recipe: Recipe; recipeIndex: number }> = ({
       type: RECIPES_LIST_SELECT_RECIPE,
       payload: recipeIndex,
     });
-    navigation.dispatch(
-      StackActions.push("Recipe", {
-        recipe,
-      })
-    );
+    navigation.dispatch(StackActions.push("Recipe"));
   };
   return (
     <ListItem noIndent onPress={navigateTo}>

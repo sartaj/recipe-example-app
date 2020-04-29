@@ -18,7 +18,7 @@ type Cart = [];
 
 type RootStackParamList = {
   Recipes: undefined;
-  Recipe: { recipe: Recipe };
+  Recipe: { title: string };
   Checkout: { cart: Cart };
 };
 
@@ -64,7 +64,7 @@ function App() {
               name="Recipe"
               options={({ route, navigation }) => ({
                 ...options({ navigation }),
-                title: route.params.recipe.name,
+                title: route.params?.title || "Recipe",
               })}
               component={RecipeView}
             />
