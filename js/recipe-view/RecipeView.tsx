@@ -39,6 +39,7 @@ const RecipeView: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
                       name={name}
                       value={value}
                       unit={unit}
+                      last={i === recipe.ingredients.length - 1}
                     />
                   );
                 })}
@@ -62,7 +63,15 @@ const RecipeView: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
               <View style={{ width: "100%", flexDirection: "column" }}>
                 {recipe.steps.map(({ description }, i) => {
                   return (
-                    <ListItem noIndent key={i}>
+                    <ListItem
+                      noIndent
+                      key={i}
+                      style={[
+                        i === recipe.steps.length - 1
+                          ? { borderColor: "white" }
+                          : null,
+                      ]}
+                    >
                       <Text>{i + 1}</Text>
                       <Body>
                         <Text>{description}</Text>
