@@ -6,12 +6,12 @@ import {
 import { AppLoading } from "expo";
 import * as React from "react";
 import { ErrorProvider } from "../error-provider/error-provider";
-import { RecipeListView } from "../recipe-list-view/recipes-list.view";
+import { RecipeListView } from "../recipes-list-view/recipes-list.view";
 import { useFonts } from "../use-fonts/use-fonts";
 import RecipeView from "../recipe-view/recipe.view";
 import { Recipe } from "../recipe-queries/recipe-queries";
 import { Icon } from "native-base";
-import { createStore } from "../state-management";
+import { createStore } from "../state-management-system";
 import { Provider } from "react-redux";
 
 type Cart = [];

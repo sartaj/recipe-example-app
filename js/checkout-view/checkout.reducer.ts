@@ -1,9 +1,15 @@
-import { Reducer } from "redux";
-import { ReducerRegistry } from "../state-management";
+import { Reducer, Action } from "redux";
+
+type CheckoutActions = {
+  type: "CHECKOUT";
+};
 
 const defaultState = {};
-const reducer: Reducer = (state = defaultState, action) => {
+const reducer: Reducer<typeof defaultState, CheckoutActions> = (
+  state = defaultState,
+  action
+) => {
   return state;
 };
 
-export const register: ReducerRegistry = ["Checkout", reducer];
+export const register = { Checkout: reducer };

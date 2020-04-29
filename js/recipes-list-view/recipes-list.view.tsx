@@ -1,10 +1,10 @@
+import { StackActions, useNavigation } from "@react-navigation/native";
+import { Container, ListItem, Spinner, Text } from "native-base";
 import * as React from "react";
-import { getRecipes, Recipe } from "../recipe-queries/recipe-queries";
-import { Spinner, Container, Card, ListItem, Text } from "native-base";
-import RecipeView from "../recipe-view/recipe.view";
 import { FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { StackActions } from "@react-navigation/native";
+import { getRecipes, Recipe } from "../recipe-queries/recipe-queries";
+import { useSelector, useDispatch } from "../state-management-system";
+import { RECIPES_LIST_SUCCESS_GET_DATA } from "./recipes-list.reducer";
 
 const RecipeListItem: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
   const navigation = useNavigation();
@@ -23,12 +23,13 @@ const RecipeListItem: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
 };
 
 export const RecipeListView: React.FC = () => {
-  const [recipes, setRecipes] = React.useState<Recipe[]>([]);
+  const dispatch = useDispatch();
+  const recipes = useSelector((state) => state.RecipesList.recipes);
 
   React.useEffect(() => {
     async function getRecipesEffect() {
       const result = await getRecipes();
-      setRecipes(result);
+      dispatch({ type: "RECIPES_LIST_SUCCESS_GET_DATA", payload: result });
     }
     getRecipesEffect();
   }, []);

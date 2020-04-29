@@ -1,26 +1,22 @@
 import {
-  Reducer,
-  combineReducers,
+  TypedUseSelectorHook,
+  useSelector as useReduxSelector,
+  useDispatch as useReduxDispatch,
+} from "react-redux";
+import {
   createStore as reduxCreateStore,
+  combineReducers as reduxCombineReducers,
 } from "redux";
 
-import * as checkout from "../checkout-view/checkout.reducer";
-import * as recipeView from "../recipe-view/recipe.reducer";
+import { allReducers } from "./all-reducers";
 
-export type ReducerRegistry = [string, Reducer];
+export const combineReducers = (r: typeof allReducers) =>
+  reduxCombineReducers(r);
 
-const allReducers: ReducerRegistry[] = [checkout.register, recipeView.register];
+export const createStore = () => reduxCreateStore(combineReducers(allReducers));
 
-const reducerRegistry: { [s: string]: Reducer } = {};
+export type AppDispatch = ReturnType<typeof createStore>["dispatch"];
+export const useDispatch: () => AppDispatch = useReduxDispatch;
 
-// Probably in the future use the ability to replace reducers to allow async adding of reducers
-export const registerReducer = (name: string, reducer: Reducer) => {
-  reducerRegistry[name] = reducer;
-};
-
-export const createStore = () => {
-  allReducers.forEach((reduceregistry: ReducerRegistry) => {
-    registerReducer(...reduceregistry);
-  });
-  return reduxCreateStore(combineReducers(reducerRegistry));
-};
+export type RootState = ReturnType<ReturnType<typeof combineReducers>>;
+export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
