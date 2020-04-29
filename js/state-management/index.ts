@@ -4,7 +4,7 @@ import {
   createStore as reduxCreateStore,
 } from "redux";
 
-import * as checkout from "../checkout/checkout.reducer";
+import * as checkout from "../checkout-view/checkout.reducer";
 import * as recipeView from "../recipe-view/recipe.reducer";
 
 export type ReducerRegistry = [string, Reducer];
