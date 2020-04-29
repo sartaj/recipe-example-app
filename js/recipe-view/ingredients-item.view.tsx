@@ -10,12 +10,12 @@ import {
 } from "native-base";
 import * as React from "react";
 import { Platform } from "react-native";
-import { Unit } from "../../recipe-queries/recipe-queries";
-import { useDispatch } from "../../state-management-system";
+import { Unit } from "../recipe-queries/recipe-queries";
+import { useDispatch } from "../state-management-system";
 import {
   RECIPE_VIEW_CHANGE_CART_COUNT,
   RECIPE_VIEW_SELECT_INGREDIENT,
-} from "../recipe.reducer";
+} from "./recipe.reducer";
 
 interface IngredientItemProps {
   name: string;

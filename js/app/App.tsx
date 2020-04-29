@@ -1,28 +1,21 @@
-import { NavigationContainer, NavigationProp } from "@react-navigation/native";
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { AppLoading } from "expo";
 import * as React from "react";
-import { ErrorProvider } from "../error-provider/error-provider";
-import { RecipeListView } from "../recipes-list-view/recipes-list.view";
-import { useFonts } from "../use-fonts/use-fonts";
-import RecipeView from "../recipe-view/recipe.view";
-import { Recipe } from "../recipe-queries/recipe-queries";
-import { Icon } from "native-base";
-import { createStore } from "../state-management-system";
 import { Provider } from "react-redux";
-
-type Cart = [];
+import CheckoutView from "../checkout-view/checkout.view";
+import { ErrorProvider } from "../error-provider/error-provider";
+import { HeaderRight } from "../header/header.view";
+import RecipeView from "../recipe-view/recipe.view";
+import { RecipeListView } from "../recipes-list-view/recipes-list.view";
+import { createStore } from "../state-management-system";
+import { useFonts } from "../use-fonts/use-fonts";
 
 type RootStackParamList = {
   Recipes: undefined;
   Recipe: { title: string };
-  Checkout: { cart: Cart };
+  Checkout: undefined;
 };
-
-const CheckoutView = () => <></>;
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -34,45 +27,41 @@ function App() {
     return <AppLoading />;
   }
 
-  const options = ({
-    navigation,
-  }: {
-    navigation: NavigationProp<RootStackParamList>;
-  }) => ({
-    headerRight: () => {
-      return (
-        <Icon
-          onPress={() => navigation.navigate("Checkout")}
-          name="md-cart"
-          style={{ marginRight: 20 }}
-        />
-      );
-    },
+  const options = () => ({
+    headerRight: () => <HeaderRight />,
   });
 
   return (
-    <ErrorProvider>
-      <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Recipes">
-            <Stack.Screen
-              name="Recipes"
-              component={RecipeListView}
-              options={options}
-            />
-            <Stack.Screen
-              name="Recipe"
-              options={({ route, navigation }) => ({
-                ...options({ navigation }),
-                title: route.params?.title || "Recipe",
-              })}
-              component={RecipeView}
-            />
-            <Stack.Screen name="Checkout" component={CheckoutView} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
-    </ErrorProvider>
+    <>
+      {/* Catch All Errors Created By Children */}
+      <ErrorProvider>
+        {/* Provide State via Redux */}
+        <Provider store={store}>
+          {/* Native Navigation System with React Navigation */}
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Recipes">
+              {/* List or Recipes Screen */}
+              <Stack.Screen
+                name="Recipes"
+                component={RecipeListView}
+                options={options}
+              />
+              {/* Single Recipe Screen */}
+              <Stack.Screen
+                name="Recipe"
+                options={({ route, navigation }) => ({
+                  ...options(),
+                  title: route.params?.title || "Recipe",
+                })}
+                component={RecipeView}
+              />
+              {/* Checkout Screen */}
+              <Stack.Screen name="Checkout" component={CheckoutView} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </Provider>
+      </ErrorProvider>
+    </>
   );
 }
 

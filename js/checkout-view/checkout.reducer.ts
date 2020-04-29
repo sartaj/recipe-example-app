@@ -1,4 +1,4 @@
-import { findIndex, pullAt } from "lodash/fp";
+import { findIndex, pullAt, remove } from "lodash/fp";
 import { Reducer } from "redux";
 import { Unit } from "../recipe-queries/recipe-queries";
 
@@ -13,7 +13,10 @@ type CheckoutActions =
     }
   | {
       type: typeof CHECKOUT_CHANGE_ITEM_COUNT;
-      payload: {};
+      payload: {
+        index: number;
+        count: number;
+      };
     }
   | {
       type: typeof CHECKOUT_CHANGE_GROCERY_STORE;
@@ -38,15 +41,15 @@ const defaultState = {
 };
 
 const mergeCart = (cart1: CartStateItem[], cart2: CartStateItem[]) => {
-  let updatedCart: CartStateItem[] = [...cart1];
-  let updatedPayload: CartStateItem[] = [...cart2];
+  let updatedCart = [...cart1];
+  let updatedPayload = [...cart2];
   updatedCart.forEach((cartItem, i) => {
     const payloadIndex = findIndex({ name: cartItem.name }, updatedPayload);
     // add to count if exists
     if (payloadIndex > -1) {
       updatedCart[i] = {
         ...cartItem,
-        count: cartItem.count + updatedPayload[payloadIndex].count,
+        count: cartItem.count + Number(updatedPayload[payloadIndex].count),
       };
       updatedPayload = pullAt(payloadIndex, updatedPayload);
     }
@@ -63,6 +66,20 @@ const reducer: Reducer<CartState, CheckoutActions> = (
       return {
         ...state,
         cart: mergeCart(state.cart, action.payload),
+      };
+    case CHECKOUT_CHANGE_ITEM_COUNT:
+      let newCart = [...state.cart];
+      if (action.payload.count > 0) {
+        newCart[action.payload.index] = {
+          ...state.cart[action.payload.index],
+          count: Number(action.payload.count),
+        };
+      } else {
+        newCart.splice(action.payload.index, 1);
+      }
+      return {
+        ...state,
+        cart: newCart,
       };
     default:
       return state;
