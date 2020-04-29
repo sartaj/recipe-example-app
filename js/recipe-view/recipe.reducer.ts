@@ -1,5 +1,5 @@
 import { Reducer, Action } from "redux";
-import { omit } from "lodash/fp";
+import { omit, set } from "lodash/fp";
 import { Unit } from "../recipe-queries/recipe-queries";
 import { CartStateItem } from "../checkout-view/checkout.reducer";
 
@@ -47,27 +47,23 @@ const reducer: Reducer<RecipeViewState, RecipeViewActions> = (
         ...state,
         cartDraft: state.cartDraft[action.payload.index]
           ? omit(action.payload.index, state.cartDraft)
-          : {
-              ...state.cartDraft,
-              [action.payload.index]: {
+          : set(
+              action.payload.index,
+              {
                 value: action.payload.value,
                 unit: action.payload.unit,
                 name: action.payload.name,
                 count: 1,
               },
-            },
+              state.cartDraft
+            ),
       };
     case RECIPE_VIEW_CHANGE_CART_COUNT:
-      return {
-        ...state,
-        cartDraft: {
-          ...state.cartDraft,
-          [action.payload.index]: {
-            ...state.cartDraft[action.payload.index],
-            count: action.payload.count,
-          },
-        },
-      };
+      return set(
+        `cartDraft[${action.payload.index}].count`,
+        action.payload.count,
+        state
+      );
     case RECIPE_VIEW_CLEAR_DRAFT:
       return {
         ...state,

@@ -89,7 +89,7 @@ const RecipeView: React.FC = () => {
         {cartSize > 0 && !itemsChecked ? (
           <CardItem style={{ justifyContent: "center" }}>
             <Button onPress={navigateToCheckout}>
-              <Text>Checkout {cartSize} Items</Text>
+              <Text>Checkout {cartSize} Ingredients</Text>
             </Button>
           </CardItem>
         ) : null}
