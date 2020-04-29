@@ -1,21 +1,18 @@
 import {
-  Container,
-  Header,
-  Content,
+  Body,
+  Button,
   Card,
   CardItem,
-  Text,
-  Body,
+  Content,
   H1,
   H2,
-  List,
   ListItem,
+  Text,
   View,
-  Button,
 } from "native-base";
 import * as React from "react";
 import { Recipe } from "../recipe-queries/recipe-queries";
-import { IngredientsItemView } from "./components/IngredientsItemView";
+import { IngredientsItemView } from "./components/ingredients-item.view";
 
 const RecipeView: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
   const itemsChecked = false;

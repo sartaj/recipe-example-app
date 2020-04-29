@@ -1,7 +1,7 @@
 import * as React from "react";
 import { getRecipes, Recipe } from "../recipe-queries/recipe-queries";
 import { Spinner, Container, Card, ListItem, Text } from "native-base";
-import RecipeView from "../recipe-view/RecipeView";
+import RecipeView from "../recipe-view/recipe.view";
 import { FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackActions } from "@react-navigation/native";
@@ -20,7 +20,6 @@ const RecipeListItem: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
       <Text>{recipe.name}</Text>
     </ListItem>
   );
-  return <RecipeView recipe={recipe} />;
 };
 
 export const RecipeListView: React.FC = () => {

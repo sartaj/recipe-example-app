@@ -13,6 +13,7 @@
     "@react-navigation/native": "^5.1.7",
     "@react-navigation/stack": "^5.2.14",
     "expo": "~37.0.3",
+    "expo-font": "~8.1.0",
     "lodash": "^4.17.15",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
@@ -23,13 +24,15 @@
     "react-native-safe-area-context": "0.7.3",
     "react-native-screens": "~2.2.0",
     "react-native-web": "~0.11.7",
-    "expo-font": "~8.1.0"
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@types/lodash": "^4.14.150",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.61.23",
+    "@types/react-redux": "^7.1.7",
     "babel-preset-expo": "~8.1.0",
     "detox": "^16.3.0",
     "detox-expo-helpers": "^0.6.0",
