@@ -1,5 +1,9 @@
 ![Recipe App Demo](./recipe-app-demo.gif)
 
+## To Run
+
+If your environment is set up with Expo and React Native, starting this app is just `npm`|`yarn` `start`|`ios`|`android` after doing an `npm install`|`yarn`
+
 ## Tech Stack Used
 
 - [x] React Native with Expo (although in a real app, may not used Expo due to issues with custom native module development)

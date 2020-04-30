@@ -22,7 +22,6 @@ import GroceryStoreSelector from "./grocery-store-selector.view";
 
 export const CheckoutView = () => {
   const cart = useSelector((state) => state.Checkout.cart);
-  console.log(cart);
   const prices = useSelector(
     (state) =>
       state.Checkout.groceryStorePrices[state.Checkout.selectedGroceryStore]
