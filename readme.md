@@ -43,3 +43,7 @@ This application attempts to follow the following principles:
 - **cloud-gateway**: Server endpoint. Currently has REST and GraphQL endpoints. Later could be abstracted to microservices.
 - **cloud-repository**: Database. Possibly relational for related data, and document for quick read data.
 - **react-component-library**: Reusable React-Native component library.
+
+## Initial State Draft
+
+![Initial State Draft](./initial-state-draft.jpg)
