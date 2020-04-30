@@ -10,7 +10,7 @@ The app starts in `js/app/app`. All files are only 1 level deep.
 
 ## Tech Stack Used
 
-- [x] React Native with Expo (although in a real app, may not used Expo due to issues with custom native module development)
+- [x] React Native with Expo (although in a real app, may not used Expo due to issues with custom native module development).
 - [x] TypeScript with all React components, Redux Actions, Redux Reducers strongly typed, meaning most errors are caught by the compiler.
 - [x] `react-navigation` for native navigation capabilities, including native access to back buttons.
 - [x] Redux with React Hooks to show centralized state management with the syntactic simplicity of hooks.
@@ -28,7 +28,7 @@ The app starts in `js/app/app`. All files are only 1 level deep.
 
 This application attempts to follow the following principles:
 
-- **Flat folder structure with long names**: Following the guidance of React core dev [Dan Ambramov](https://twitter.com/dan_abramov/status/1145354949871767552)
+- **Flat folder structure with long names**: Following the guidance of React core dev [Dan Ambramov](https://twitter.com/dan_abramov/status/1145354949871767552).
 - **Business Oriented Folders, Technically Oriented Files**: The folder structure co-locates data/ui logic in the same folder, because in real world development such files are codeveloped. However, they are still separated by file name sub extensions, thus keeping natural sepration of concerns. In a full project, filetypes would include `.reducer`, `.view`, `.queries`, `.spec`, `.constants`, `.stories`, etc.
 - **Modules First**: Try to keep projects and client tech stacks small. This way, everything from trying new tech stacks to rebasing becomes easier.
 - **Use Hooks and Functions**: Almost this entire app is written with functional components and hooks.
