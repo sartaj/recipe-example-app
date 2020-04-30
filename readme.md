@@ -16,12 +16,13 @@ The app starts in `js/app/app`. All files are only 1 level deep.
 - [x] Redux with React Hooks to show centralized state management with the syntactic simplicity of hooks.
 - [x] Native Base component library to focus on app development that works cross platform.
 - [ ] Ideally would have GraphQL endpoint for data management.
-- [ ] Have jest + `@testing-library/native` installed, but ran out of time.
-- [ ] Have `detox` installed for E2E tests, but ran out of time to run them.
-- [ ] Show individual components with Storybook.
+- [ ] Have jest + `@testing-library/native` installed, but ran out of time to write tests.
+- [ ] Have `detox` installed for E2E tests, but ran out of time to write e2e tests.
+- [ ] Have Storybook to show individual components.
 - [ ] Add CICD process, probably with Windows App Center.
 - [ ] Add production logging, probably with Windows App Center.
 - [ ] Add more Parallax Animations since it's a consumer product.
+- [ ] Add i18n support.
 
 ## Architecture Principles
 
