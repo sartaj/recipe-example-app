@@ -19,6 +19,7 @@ import { CHECKOUT_ADD_TO_CART } from "../checkout-view/checkout.reducer";
 import { useDispatch, useSelector } from "../state-management-system";
 import { IngredientsItemView } from "./ingredients-item.view";
 import { RECIPE_VIEW_CLEAR_DRAFT } from "./recipe.reducer";
+import GroceryStoreSelector from "../checkout-view/grocery-store-selector.view";
 
 const RecipeView: React.FC = () => {
   const navigation = useNavigation();
@@ -90,9 +91,15 @@ const RecipeView: React.FC = () => {
             </Card>
           </CardItem>
           {itemsChecked ? (
-            <CardItem style={{ justifyContent: "center" }}>
+            <CardItem
+              style={{ justifyContent: "center", flexDirection: "row" }}
+            >
+              <View style={{ marginHorizontal: 20 }}>
+                <GroceryStoreSelector />
+              </View>
+
               <Button onPress={submitCart}>
-                <Text>Add {itemsChecked} Ingredients To Cart</Text>
+                <Text>Add {itemsChecked} To Cart</Text>
               </Button>
             </CardItem>
           ) : null}
@@ -100,7 +107,7 @@ const RecipeView: React.FC = () => {
             <CardItem style={{ justifyContent: "center" }}>
               <Button iconLeft onPress={navigateToCheckout}>
                 <Icon name="md-cart" />
-                <Text>Checkout {cartSize} Ingredients</Text>
+                <Text>Checkout ({cartSize})</Text>
               </Button>
             </CardItem>
           ) : null}

@@ -24,7 +24,7 @@ type CheckoutActions =
     }
   | {
       type: typeof CHECKOUT_CHANGE_GROCERY_STORE;
-      payload: string;
+      payload: keyof typeof groceryStorePrices;
     };
 
 export interface CartStateItem {
@@ -59,7 +59,7 @@ const mergeCart = (cart1: CartStateItem[], cart2: CartStateItem[]) => {
 
 const defaultState = {
   cart: [],
-  selectedGroceryStore: defaultGroceryStore,
+  selectedGroceryStore: defaultGroceryStore as keyof typeof groceryStorePrices,
   groceryStorePrices,
 };
 const reducer: Reducer<CartState, CheckoutActions> = (
@@ -85,6 +85,11 @@ const reducer: Reducer<CartState, CheckoutActions> = (
       return {
         ...state,
         cart: newCart,
+      };
+    case CHECKOUT_CHANGE_GROCERY_STORE:
+      return {
+        ...state,
+        selectedGroceryStore: action.payload,
       };
     default:
       return state;
