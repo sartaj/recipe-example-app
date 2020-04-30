@@ -1,4 +1,4 @@
-[Recipe App Demo](./recipe-app-demo.gif)
+![Recipe App Demo](./recipe-app-demo.gif)
 
 ## Tech Stack Used
 
