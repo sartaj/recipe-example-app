@@ -38,18 +38,7 @@ This application attempts to follow the following principles:
 
 ## Additional Packages In A Potential Full Stack Architecture
 
-### domain
-
-Core business logic (including GraphQL types and TS types). Can be imported by both server and client code.
-
-### cloud-gateway
-
-Server endpoint. Currently has REST and GraphQL endpoints. Later could be abstracted to microservices.
-
-### cloud-repository
-
-Database. Possibly relational for related data, and document for quick read data.
-
-### react-component-library
-
-Reusable React-Native component library.
+- **domain**: Core business logic (including GraphQL types and TS types). Can be imported by both server and client code.
+- **cloud-gateway**: Server endpoint. Currently has REST and GraphQL endpoints. Later could be abstracted to microservices.
+- **cloud-repository**: Database. Possibly relational for related data, and document for quick read data.
+- **react-component-library**: Reusable React-Native component library.
