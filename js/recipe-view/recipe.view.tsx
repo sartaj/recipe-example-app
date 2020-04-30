@@ -5,21 +5,22 @@ import {
   Button,
   Card,
   CardItem,
+  Container,
   Content,
   H1,
   H2,
+  Icon,
   ListItem,
   Text,
   View,
-  Container,
-  Icon,
 } from "native-base";
 import * as React from "react";
+import { Image } from "react-native";
 import { CHECKOUT_ADD_TO_CART } from "../checkout-view/checkout.reducer";
+import GroceryStoreSelector from "../checkout-view/grocery-store-selector.view";
 import { useDispatch, useSelector } from "../state-management-system";
 import { IngredientsItemView } from "./ingredients-item.view";
 import { RECIPE_VIEW_CLEAR_DRAFT } from "./recipe.reducer";
-import GroceryStoreSelector from "../checkout-view/grocery-store-selector.view";
 
 const RecipeView: React.FC = () => {
   const navigation = useNavigation();
@@ -33,6 +34,7 @@ const RecipeView: React.FC = () => {
   const prices = useSelector(
     (state) =>
       state.Checkout.groceryStorePrices[state.Checkout.selectedGroceryStore]
+        .prices
   );
 
   const dispatch = useDispatch();
@@ -59,10 +61,41 @@ const RecipeView: React.FC = () => {
   return (
     <Container>
       <Content>
+        <Image
+          style={{ height: 200, flex: 1, opacity: 1 }}
+          source={{
+            uri: recipe.image,
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            height: 200,
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            flex: 1,
+            flexDirection: "row",
+            padding: 20,
+          }}
+        >
+          <Text
+            style={{
+              color: "white",
+              textShadowColor: "rgba(0, 0, 0, 0.6)",
+              textShadowOffset: { width: -1, height: 1 },
+              textShadowRadius: 2,
+              fontWeight: "700",
+              fontSize: 40,
+            }}
+          >
+            {recipe.name.toUpperCase()}
+          </Text>
+        </View>
+
         <Card transparent={true}>
-          <CardItem header>
-            <H1>{recipe.name}</H1>
-          </CardItem>
+          <CardItem header></CardItem>
           <CardItem>
             <H2>Ingredients</H2>
           </CardItem>

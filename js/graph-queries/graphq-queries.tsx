@@ -1,8 +1,10 @@
 import { Recipe } from "./types";
-import { map, mapValues } from "lodash/fp";
+import { mapValues } from "lodash/fp";
 
 const quesoDeCabra: Recipe = {
   name: "Quéso de Cabra",
+  image:
+    "https://www.sportlife.es/media/cache/big/upload/images/article/5c135c790ee6946b0a34992f/5c135db00ee694970a34984a-por-que-el-queso-de-cabra-es-tan-bueno-nzm.jpg",
   ingredients: [
     {
       name: "Baguettes",
@@ -75,6 +77,8 @@ const quesoDeCabra: Recipe = {
 
 const riceAndBeans: Recipe = {
   name: "Rice And Beans",
+  image:
+    "https://hispanickitchen-nglmedia.netdna-ssl.com/wp-content/uploads/2016/10/8-RiceBeansLandscapeweb.jpg",
   ingredients: [
     {
       name: "Rice",
@@ -85,6 +89,11 @@ const riceAndBeans: Recipe = {
       name: "Beans",
       value: 1,
       unit: "lbs",
+    },
+    {
+      name: "Garlic",
+      value: 1,
+      unit: "cloves",
     },
   ],
   steps: [
@@ -129,10 +138,22 @@ const defaultPrices = {
 };
 
 export const groceryStorePrices = {
-  "Whole Foods": mapValues((value) => value * 1.3, defaultPrices),
-  Wheatsville: mapValues((value) => value * 1.15, defaultPrices),
-  HEB: mapValues((value) => value * 1, defaultPrices),
-  ALDI: mapValues((value) => value * 0.85, defaultPrices),
+  "Whole Foods": {
+    prices: mapValues((value) => value * 1.3, defaultPrices),
+    deliveryTime: "1hr",
+  },
+  Wheatsville: {
+    prices: mapValues((value) => value * 1.15, defaultPrices),
+    deliveryTime: "2hrs",
+  },
+  HEB: {
+    prices: mapValues((value) => value * 1, defaultPrices),
+    deliveryTime: "3hrs",
+  },
+  ALDI: {
+    prices: mapValues((value) => value * 0.85, defaultPrices),
+    deliveryTime: "4hrs",
+  },
 };
 
 export const defaultGroceryStore = "Wheatsville";

@@ -60,7 +60,7 @@ export const IngredientsItemView: React.FC<IngredientItemProps> = React.memo(
                 mode="dropdown"
                 iosIcon={<Icon name="arrow-down" />}
                 style={{
-                  width: "100%",
+                  width: 130,
                   marginRight: Platform.OS === "ios" ? 30 : undefined,
                 }}
                 selectedValue={String(draftValue)}

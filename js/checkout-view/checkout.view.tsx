@@ -26,6 +26,7 @@ export const CheckoutView = () => {
   const prices = useSelector(
     (state) =>
       state.Checkout.groceryStorePrices[state.Checkout.selectedGroceryStore]
+        .prices
   );
 
   const priceTotal = useSelector((state) =>
@@ -36,7 +37,7 @@ export const CheckoutView = () => {
           next.count *
             state.Checkout.groceryStorePrices[
               state.Checkout.selectedGroceryStore
-            ][next.name],
+            ].prices[next.name],
         0
       )
       .toFixed(2)
@@ -139,7 +140,7 @@ export const CheckoutView = () => {
               <GroceryStoreSelector />
             </Body>
             <Right>
-              <H3>Total: {priceTotal}</H3>
+              <H3>Total: ${priceTotal}</H3>
             </Right>
           </CardItem>
         </Card>
