@@ -22,9 +22,7 @@ import GroceryStoreSelector from "./grocery-store-selector.view";
 
 export const CheckoutView = () => {
   const cart = useSelector((state) => state.Checkout.cart);
-  const selectedGroceryStore = useSelector(
-    (state) => state.Checkout.selectedGroceryStore
-  );
+  console.log(cart);
   const prices = useSelector(
     (state) =>
       state.Checkout.groceryStorePrices[state.Checkout.selectedGroceryStore]
@@ -113,7 +111,7 @@ export const CheckoutView = () => {
                             });
                           }}
                         >
-                          {Array.from(Array(11)).map((_, i) => (
+                          {Array.from(Array(110)).map((_, i) => (
                             <Picker.Item
                               key={i}
                               label={
