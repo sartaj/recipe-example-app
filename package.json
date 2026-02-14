@@ -37,7 +37,7 @@
     "detox": "^16.3.0",
     "detox-expo-helpers": "^0.6.0",
     "expo-detox-hook": "^1.0.10",
-    "jest-expo": "^37.0.0",
+    "jest-expo": "^54.0.17",
     "react-native-testing-library": "^1.13.2",
     "react-test-renderer": "^16.13.1",
     "typescript": "~3.8.3"
